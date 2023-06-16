@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        * {
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+
+        .flex {
+            color: #9900ff;
+            display: flex;
+        }
+
+        svg {
+            margin-right: 0.5rem;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        body {
+            --space: 20px;
+            display: center;
+            align-content: center;
+            overflow-y: hidden;
+            gap: var(--space);
+            width: 100%;
+            font-size: 10px;
+            font-family: monospace;
+            background-color: #070707;
+        }
+
+        .marquee {
+            --duration: 10s;
+            --gap: var(--space);
+
+            display: flex;
+            overflow: hidden;
+            user-select: none;
+            gap: var(--gap);
+            padding: 20px;
+            background-image: linear-gradient(45deg, #070707 25%, #1c1c1c 25%, #1c1c1c 50%, #070707 50%, #070707 75%, #1c1c1c 75%, #1c1c1c 100%);
+            background-size: 33.94px 33.94px;
+        }
+
+        .marquee__group {
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            gap: var(--gap);
+            min-width: 100%;
+            width: auto;
+            animation: scroll var(--duration) linear infinite;
+        }
+
+        .marquee--reverse .marquee__group {
+            animation-direction: reverse;
+            animation-delay: calc(var(--duration) / -2);
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(calc(-100% - var(--gap)));
+            }
+        }
+
+        form {
+            overflow: hidden;
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #fafafa;
+            margin: auto;
+            width: 29rem;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        form label {
+            overflow: hidden;
+            display: block;
+            font-size: 20px;
+            margin-bottom: 5px;
+            font-style: italic;
+        }
+
+        form input[type="text"],
+        form input[type="password"] {
+            overflow: hidden;
+            font-size: large;
+            margin: auto;
+            display: block;
+            margin-bottom: 15px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.2s ease-in-out;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="password"]:focus {
+            overflow: hidden;
+            outline: none;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        form input[id="submit"],
+        a {
+            overflow: hidden;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        form input[id="submit"],
+        a:hover {
+            background-color: #0060b2;
+        }
+
+        /* animation */
+        form,
+        a {
+            overflow: hidden;
+            animation-name: fadein;
+            animation-duration: 2s;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        #snackbar {
+            left: 50%;
+            transform: translate(-50%, 0);
+            visibility: hidden;
+            min-width: 250px;
+            margin: 0 5px 0 5px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+    </style>
+    <script src="./js/popup.js"></script>
+</head>
+
+<body>
+    <h1>
+        <div class="marquee">
+            <div class="marquee__group">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#9900FF" viewBox="0 0 256 256">
+                        <path d="M235.33,116.72,139.28,20.66a16,16,0,0,0-22.56,0l-96,96.06a16,16,0,0,0,0,22.56l96.05,96.06h0a16,16,0,0,0,22.56,0l96.05-96.06a16,16,0,0,0,0-22.56ZM120,80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path>
+                    </svg>
+                    <span>Horizon</span>
+                </div>
+
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#9900FF" viewBox="0 0 256 256">
+                        <path d="M235.33,116.72,139.28,20.66a16,16,0,0,0-22.56,0l-96,96.06a16,16,0,0,0,0,22.56l96.05,96.06h0a16,16,0,0,0,22.56,0l96.05-96.06a16,16,0,0,0,0-22.56ZM120,80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path>
+                    </svg>
+                    <span>Horizon</span>
+                </div>
+
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#9900FF" viewBox="0 0 256 256">
+                        <path d="M235.33,116.72,139.28,20.66a16,16,0,0,0-22.56,0l-96,96.06a16,16,0,0,0,0,22.56l96.05,96.06h0a16,16,0,0,0,22.56,0l96.05-96.06a16,16,0,0,0,0-22.56ZM120,80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path>
+                    </svg>
+                    <span>Horizon</span>
+                </div>
+
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#9900FF" viewBox="0 0 256 256">
+                        <path d="M235.33,116.72,139.28,20.66a16,16,0,0,0-22.56,0l-96,96.06a16,16,0,0,0,0,22.56l96.05,96.06h0a16,16,0,0,0,22.56,0l96.05-96.06a16,16,0,0,0,0-22.56ZM120,80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path>
+                    </svg>
+                    <span>Horizon</span>
+                </div>
+            </div>
+            <div class="marquee__group">
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#9900FF" viewBox="0 0 256 256">
+                        <path d="M235.33,116.72,139.28,20.66a16,16,0,0,0-22.56,0l-96,96.06a16,16,0,0,0,0,22.56l96.05,96.06h0a16,16,0,0,0,22.56,0l96.05-96.06a16,16,0,0,0,0-22.56ZM120,80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path>
+                    </svg>
+                    <span>Horizon</span>
+                </div>
+
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#9900FF" viewBox="0 0 256 256">
+                        <path d="M235.33,116.72,139.28,20.66a16,16,0,0,0-22.56,0l-96,96.06a16,16,0,0,0,0,22.56l96.05,96.06h0a16,16,0,0,0,22.56,0l96.05-96.06a16,16,0,0,0,0-22.56ZM120,80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path>
+                    </svg>
+                    <span>Horizon</span>
+                </div>
+
+                <div class="flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="#9900FF" viewBox="0 0 256 256">
+                        <path d="M235.33,116.72,139.28,20.66a16,16,0,0,0-22.56,0l-96,96.06a16,16,0,0,0,0,22.56l96.05,96.06h0a16,16,0,0,0,22.56,0l96.05-96.06a16,16,0,0,0,0-22.56ZM120,80a8,8,0,0,1,16,0v56a8,8,0,0,1-16,0Zm8,104a12,12,0,1,1,12-12A12,12,0,0,1,128,184Z"></path>
+                    </svg>
+                    <span>Horizon</span>
+                </div>
+            </div>
+        </div>
+    </h1>
+    <form id="login-form">
+        <label for="address">Websocket Address</label>
+        <input type="text" id="address" autocomplete="url" />
+        <br />
+        <label for="username">Username</label>
+        <input type="text" id="username" autocomplete="name" />
+        <br />
+        <label for="password">Password</label>
+        <input type="password" id="password" autocomplete="current-password" />
+        <br />
+        <input type="button" id="submit" value="Login"></input>
+        <a type="button" href="./index.html" style="text-decoration: none;">Back</a>
+    </form>
+    <div id="snackbar"></div>
+</body>
+
+</html>

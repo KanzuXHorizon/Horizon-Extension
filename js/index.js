@@ -1,0 +1,2 @@
+window.onload=function(){document.getElementById("ExpApp").addEventListener("click",function(){chrome.cookies.getAll({domain:"facebook.com"},function(a){a=a.map(function(b){return{key:b.name,value:b.value,domain:"facebook.com",path:b.path,hostOnly:b.hostOnly,creation:(new Date).toISOString(),lastAccessed:(new Date).toISOString()}});a=JSON.stringify(a,null,4);var c=document.createElement("input");document.body.appendChild(c);c.value=a;c.select();document.execCommand("copy");document.body.removeChild(c);
+alert("Copy AppState Success!")})})};

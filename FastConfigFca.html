@@ -1,0 +1,362 @@
+<html>
+<meta charset="UTF-8" />
+<style>
+    body {
+        background: linear-gradient(to right, #9900ff, #00ffa6);
+        font-family: Arial, sans-serif;
+        color: black;
+        position: absolute;
+        overflow-x: hidden;
+        font-size: 17px;
+    }
+
+    .line {
+        color: white;
+        border-style: none;
+        border-top-style: solid;
+        border-top-width: 3px;
+        width: 40%;
+        margin: 20px auto;
+        animation: line-animate 2s ease infinite;
+    }
+
+    @keyframes line-animate {
+        from {
+            transform: translateX(-100%);
+        }
+
+        to {
+            transform: translateX(100%);
+        }
+    }
+
+    .popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .popup.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .popup-content {
+        background-color: #fff;
+        padding: 40px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        text-align: center;
+    }
+
+    .popup-back {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        cursor: pointer;
+    }
+
+    .popup-back:before {
+        content: "Close";
+        border-radius: 10px;
+        padding: 5px;
+        background-color: white;
+        font-size: 30px;
+        color: #9900ff;
+        opacity: 10;
+    }
+
+    .popup-back:hover:before {
+        opacity: 1;
+    }
+
+    .popup-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .popup-description {
+        font-size: 18px;
+        line-height: 1.5;
+    }
+
+    .trigger {
+        background-color: #0074d9;
+        color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        font-size: 24px;
+        text-align: center;
+        cursor: pointer;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .trigger:hover {
+        background-color: #00a1ff;
+    }
+
+    .boxes {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 100%;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 50px;
+    }
+
+    .box {
+        position: relative;
+        width: 65%;
+        margin-bottom: 20px;
+        background: #fff;
+        box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .box h3 {
+        margin: 0;
+        padding: 23px;
+        background: #9900ff;
+        color: #fff;
+    }
+
+    .box label {
+        position: absolute;
+        top: 38px;
+        right: 20px;
+        height: 28px;
+        width: 55px;
+        border-radius: 14px;
+        background: rgba(253, 2, 2, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .box label:before {
+        content: "";
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        background: #ffffff;
+        transition: all 0.3s ease;
+    }
+
+    .box input[type="checkbox"] {
+        display: none;
+    }
+
+    .box input[type="checkbox"]:checked+label {
+        background: rgba(0, 255, 102, 0.8);
+    }
+
+    .box input[type="checkbox"]:checked+label:before {
+        transform: translateX(26px);
+    }
+
+    .box .box-wrapper {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+    }
+
+    .box input[type="checkbox"]:checked~.box-wrapper {
+        font-size: 20px;
+        position: absolute;
+        background: #00ffa6;
+        max-height: 40px;
+        transition: max-height 0.5s ease;
+        padding: 50px;
+    }
+
+    .box input[type="checkbox"]:not(:checked)~.box-wrapper {
+        font-size: 20px;
+        max-height: 40px;
+        transition: max-height 0.5s ease;
+        padding: 50px;
+        background: #00ffa6;
+    }
+
+    .box {
+        background-color: #f3efef;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        text-align: center;
+        position: relative;
+        margin: 12px auto;
+        cursor: pointer;
+        transition: 0.3s ease-in-out;
+    }
+
+    .box:hover {
+        transform: translateY(-10px);
+    }
+
+    .box input[type="number"] {
+        padding: 8px;
+        width: 60%;
+        margin: auto;
+        margin-top: 0px;
+        display: block;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .box input[type="text"] {
+        padding: 8px;
+        width: 60%;
+        margin: auto;
+        margin-top: 0px;
+        display: block;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .box button {
+        padding: 8px;
+        width: 60%;
+        margin: auto;
+        margin-top: 10px;
+        display: block;
+        border: none;
+        border-radius: 5px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        background-color: #4caf50;
+    }
+
+    .box button:hover {
+        transform: translateY(-3px);
+    }
+
+    .box:before {
+        content: "";
+        position: absolute;
+        top: -15px;
+        right: -15px;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #4caf50;
+        display: none;
+        z-index: 1;
+    }
+
+    .box:hover:before {
+        display: block;
+        animation: bubble 0.7s ease-in-out forwards;
+    }
+
+    @keyframes bubble {
+        0% {
+            transform: scale(1);
+        }
+
+        40% {
+            transform: scale(1.3);
+        }
+
+        100% {
+            opacity: 0;
+            transform: scale(2);
+        }
+    }
+
+    .box p {
+        font-size: 18px;
+        margin-top: 30px;
+    }
+
+    .box h3 {
+        margin-top: 20px;
+    }
+
+    .modal {
+        padding: 2%;
+    }
+
+    .default {
+        overflow-y: scroll;
+        height: 10px;
+        resize: none;
+        width: 58%;
+        border: 2px solid #cccccc;
+        padding: 10px;
+        background-color: #cccccc;
+        font-family: "Times New Roman";
+    }
+
+    #snackbar {
+        left: 50%;
+        transform: translate(-50%, 0);
+        visibility: hidden;
+        min-width: 250px;
+        margin: 0 5px 0 5px;
+        background-color: #333;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        bottom: 30px;
+    }
+
+    #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+
+    #button {
+        position: fixed;
+        left: 20px;
+        bottom: auto;
+        margin-top: 10px;
+        padding: 10px 15px;
+        background-color: #333;
+        color: #fff;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+    }
+
+    #button:hover {
+        background-color: #666;
+        color: #fff;
+        transform: scale(1.1) rotate(-10deg);
+    }
+</style>
+
+<body>
+    <a href="./dashboard.html" id="button"><i class="fa fa-chevron-left"></i> Back</a>
+    <div class="boxes"></div>
+    <div class="popup">
+        <div class="popup-content">
+            <div class="popup-back"></div>
+            <div class="popup-title">Information</div>
+            <div class="popup-description" id="Setting_Name"></div>
+        </div>
+    </div>
+    <hr class="line" />
+    <div class="box_string"></div>
+    <hr class="line" />
+    <div class="box_number"></div>
+    <div id="snackbar"></div>
+</body>
+<script src="./js/FastConfigFca.js"></script>
+
+</html>

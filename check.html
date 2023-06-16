@@ -1,0 +1,93 @@
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Session ID Check</title>
+    <style>
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        .animation {
+            display: block;
+            width: 60px;
+            height: 60px;
+            margin: 20% auto 0;
+            border: 6px solid #333;
+            border-radius: 50%;
+            border-top-color: #9900ff;
+
+            animation: rotation 2s infinite linear;
+        }
+
+        .content {
+            text-align: center;
+            margin-top: 50px;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        #snackbar {
+            left: 50%;
+            transform: translate(-50%, 0);
+            visibility: hidden;
+            min-width: 250px;
+            margin: 0 5px 0 5px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            bottom: 30px;
+        }
+
+        #snackbar.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+    </style>
+    <script src="./js/check.js"></script>
+</head>
+
+<body>
+    <div class="animation"></div>
+    <div class="content">
+        <h1>Checking Your Session ID...</h1>
+    </div>
+    <div id="snackbar"></div>
+</body>
+
+</html>

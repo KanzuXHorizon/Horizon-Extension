@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Dashboard</title>
+    <style>
+        body {
+            background: linear-gradient(to right, #9900ff, #92fe9d);
+            overflow: hidden;
+        }
+
+        h1 {
+            display: block;
+            color: black;
+            text-align: center;
+            padding-top: 5px;
+            border-radius: 5px;
+            border: 2px solid #cccccc;
+            width: 61.7%;
+            margin: 0 auto;
+            font-size: 50px;
+            background-color: linear-gradient(to right, #9900ff, #92fe9d);
+        }
+
+        .dashboard-header {
+            animation: colorAnimation 3s infinite;
+        }
+
+        @keyframes colorAnimation {
+            0% {
+                color: red;
+            }
+
+            25% {
+                color: yellow;
+            }
+
+            50% {
+                color: green;
+            }
+
+            75% {
+                color: blue;
+            }
+
+            100% {
+                color: purple;
+            }
+        }
+
+        .container {
+            background-color: #dddddd;
+            margin: 50px auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            max-width: 800px;
+            min-height: 400px;
+        }
+
+        .button {
+            position: relative;
+            background-color: #9900ff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .button:hover {
+            background-color: #9900ff;
+        }
+
+        .input-text {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+            border: 2px solid #cccccc;
+            border-radius: 4px;
+            background-color: #cccccc;
+            resize: vertical;
+        }
+
+        .console {
+            overflow-y: scroll;
+            height: 260px;
+            resize: none;
+            width: 96.8%;
+            border: 2px solid #cccccc;
+            padding: 10px;
+            background-color: #cccccc;
+            font-family: "Times New Roman";
+        }
+
+        iframe {
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 9999;
+            width: 600px;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            background-color: white;
+            animation: popup-fade-in 0.5s ease forwards;
+        }
+
+        @keyframes popup-fade-in {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -60%);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        #save:hover,
+        #cancel:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="popup">
+        <h2 style="text-align: center;">Enter Your AppState</h2>
+        <form>
+            <center>
+                <textarea id="AppState" class="console" style="overflow: visible;" placeholder="Enter your appstate here"></textarea>
+                <button id="save" class="button">Save</button>
+                <button id="cancel" class="button">Cancel</button>
+                <input id="fromFile" type="file" class="button"></input>
+            </center>
+        </form>
+    </div>
+    <h1 class="dashboard-header">Dashboard</h1>
+    <div class="container">
+        <iframe class="console" id="console" style="overflow: auto; scrollbar-width: thin;"></iframe>
+        <form id="command">
+            <center>
+                <input class="input-text" type="text" name="command" placeholder="Type command here..." />
+                <button class="button" id="submit" type="submit">Send</button>
+                <button class="button" type="button" id="stop">Stop</button>
+                <button class="button" type="button" id="restart">Restart</button>
+            </center>
+        </form>
+        <center>
+            <button class="button" type="button" id="reconnect">Reconnect Websocket</button>
+            <button class="button" type="button" id="changeappstate">Change AppState</button>
+            <button class="button" type="button" id="fastconfigfca">Fast Config</button>
+        </center>
+    </div>
+    <script src="./js/dashboard.js"></script>
+</body>
+
+</html>

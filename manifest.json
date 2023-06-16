@@ -1,0 +1,32 @@
+{
+  "name": "Horizon_Extension",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "A WebSocket client connects to the server fca-horizon-remastered to control and facilitate faster remote operations with the WebSocket client",
+  "icons": {
+      "16": "img/logo.ico",
+      "48": "img/logo.ico"
+  },
+  "browser_action": {
+      "default_popup": "index.html",
+      "default_icon": {
+          "19": "img/logo.ico",
+          "38": "img/logo.ico"
+      },
+      "default_title": "Bot chat for messenger facebook"
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "background": {
+      "scripts": [
+          "./js/background.js"
+      ],
+      "persistent": false
+  },
+  "permissions": [
+      "cookies",
+      "activeTab",
+      "https://*.facebook.com/"
+  ],
+
+  "web_accessible_resources": ["*.html", "*.css", "*.js", "*.ico"]
+}
