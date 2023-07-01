@@ -13,7 +13,7 @@
           "19": "img/logo.ico",
           "38": "img/logo.ico"
       },
-      "default_title": "Bot chat for messenger facebook"
+      "default_title": "Horizon Extension"
   },
   "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "background": {
